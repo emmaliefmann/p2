@@ -1,3 +1,18 @@
-<h2>Olympic games app</h2>
+<h1>Olympic games app</h1>
 <hr />
 <p>{{ (olympics$ | async)?.length }} data loaded</p>
+<div class="rounded-text">
+    <h2>Medals per Country</h2>
+</div>
+<div class="number-container">
+    <div class="rounded-text">
+        <h3>Number of JOs</h3>
+    </div>
+    <div class="rounded-text">
+        <h3>Number of countries</h3>
+        <span>{{ (olympics$ | async)?.length }}</span>
+    </div>
+</div>
+<div class="pie-container">
+    <p-chart #chart type="pie" [data]="data" />
+</div>
