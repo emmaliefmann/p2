@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+// PrimeNG imports
+import { ChartModule } from 'primeng/chart';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
-  providers: [],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ChartModule],
+  providers: [ChartModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
