@@ -1,0 +1,18 @@
+<a routerLink="/">Go back</a>
+<h2>{{ country }}</h2>
+<div>
+    <span>number of entries {{ nbEntries }} </span>
+</div>
+
+<div>
+    <span>number of medals {{ nbMedals }} </span>
+</div>
+
+<div>
+    <span>number of athletes {{ nbAthletes }} </span>
+</div>
+
+<div class="chart-container">
+     <p-chart type="line" [data]="data"/>
+     
+</div>
