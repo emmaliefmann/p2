@@ -4,7 +4,7 @@ import { ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { Router } from '@angular/router';
 
-import { Olympic } from 'src/app/core/services/models/olympic.model';
+import { Olympic } from 'src/app/core/models/olympic.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
 @Component({
