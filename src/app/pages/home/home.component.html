@@ -1,15 +1,17 @@
-<div class="rounded-text">
-    <h2>Medals per Country</h2>
-</div>
-<div class="number-container">
-    <div class="rounded-text">
-        <h3>Number of JOs</h3>
+<div class="page-cont">
+    <div class="title-cont">
+        <h1>Medals per Country</h1>
     </div>
-    <div class="rounded-text">
-        <h3>Number of countries</h3>
-        <span>{{ (olympics$ | async)?.length }}</span>
+    <div class="number-container">
+        <div>
+            <h3>Number of JOs</h3>
+        </div>
+        <div>
+            <h3>Number of countries</h3>
+            <span>{{ (olympics$ | async)?.length }}</span>
+        </div>
     </div>
-</div>
-<div class="pie-container">
-    <p-chart #chart type="pie" [data]="data" (onDataSelect)="handleClick($event)" />
+    <div class="pie-container">
+        <p-chart #chart type="pie" [data]="data" [options]="options" (onDataSelect)="handleClick($event)" />
+    </div>
 </div>

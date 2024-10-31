@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ViewChild } from '@angular/core';
-import { Chart } from 'chart.js';
+import { Chart, elements } from 'chart.js';
 import { Router } from '@angular/router';
 
 import { Olympic } from 'src/app/core/models/olympic.model';
@@ -15,14 +15,16 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 
 export class HomeComponent implements OnInit {
   @ViewChild('chart') chart!: Chart;
-  
+
   public olympics$: Observable<Olympic[] | null> = of(null);
   data!: any;
   labels: string[] = [];
   medalData: number[] = [];
-  
-  constructor(private olympicService: OlympicService, private router: Router) {}
-  
+  documentStyle = getComputedStyle(document.documentElement);
+  options: any;
+
+  constructor(private olympicService: OlympicService, private router: Router) { }
+
   ngOnInit(): void {
     // wierd to have two values 
     this.olympics$ = this.olympicService.getOlympics();
@@ -33,10 +35,10 @@ export class HomeComponent implements OnInit {
         }
       },
       error: (err) => console.warn(err),
-      complete: () => {},
+      complete: () => { },
     });
   }
-  
+
   // fix any, PointerEvent index not correct
   handleClick($event: any) {
     const i: number = $event.element.index;
@@ -59,15 +61,33 @@ export class HomeComponent implements OnInit {
   }
 
   updateChart() {
+    const documentStyle = getComputedStyle(document.documentElement);
     this.data = {
       labels: this.labels,
       datasets: [
         {
           data: [...this.medalData],
-          // TODO add correct colors 
-          // TODO Hover info
+          backgroundColor: [documentStyle.getPropertyValue('--italy-color'), documentStyle.getPropertyValue('--spain-color'), documentStyle.getPropertyValue('--usa-color'), documentStyle.getPropertyValue('--germany-color'), documentStyle.getPropertyValue('--france-color')]
         },
       ],
     };
+
+    this.options = {
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          backgroundColor: documentStyle.getPropertyValue('--accent-color'),
+          padding: 10,
+          displayColors: false
+        },
+        elements: {
+          arc: {
+            borderColor: 'transparent'
+          }
+        }
+      }
+    }
   }
 }
