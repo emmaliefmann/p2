@@ -1,20 +1,54 @@
 :host {
-    .rounded-text {
-        border: 1px;
-        border-radius: 10px;
-        //TODO global variables color palette
-        background-color: lightgrey;
-        padding: 0.5rem;
-        margin: 0.5rem;
-        text-align: center;
-    }
-
-    .number-container {
+    .page-cont {
         display: flex;
-        justify-content: center;
-    }
+        align-items: center;
+        flex-direction: column;
 
-    .pie-container {
-        max-width: 800px;
+        .title-cont {
+            background-color: #04838f;
+            text-align: center;
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            margin: 0.5rem;
+            margin-top: 2rem;
+            text-align: center;
+
+            h1 {
+                margin: 0;
+                color: white;
+                font-weight: lighter;
+            }
+        }
+
+        .number-container {
+            display: flex;
+            justify-content: space-around;
+
+            div {
+                border: 2px #04838f solid;
+                border-radius: 10px;
+                margin: 0.5rem 4rem;
+                text-align: center;
+                padding: 1rem;
+
+                h3 {
+                    margin: 0;
+                    margin-bottom: 0.5rem;
+                    font-weight: lighter;
+                    font-size: 12pt;
+                }
+                span {
+                    font-weight: bold;
+                    font-size: 12pt;
+                }
+            }
+        }
+
+        .pie-container {
+            text-align: center;
+            width: 100%;
+            max-width: 700px;
+            margin-top: 2rem;
+        }
     }
 }

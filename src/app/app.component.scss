@@ -1,0 +1,11 @@
+:host {
+    .page-container {
+        display: flex;
+        justify-content: center;
+        .content {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+    }
+}

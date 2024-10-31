@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --italy-color: #946266;
+    --spain-color: #b9cbe6;
+    --usa-color: #8aa0d8;
+    --germany-color: #784051;
+    --france-color: #9881a1;
+    --uk-color: #c0dff0;
+    --accent-color: #04838f;
+}
