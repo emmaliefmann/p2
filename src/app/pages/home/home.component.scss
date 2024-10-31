@@ -23,11 +23,13 @@
         .number-container {
             display: flex;
             justify-content: space-around;
-
+            min-width: 400px;
+            width: 70%;
+            max-width: 800px;
             div {
                 border: 2px #04838f solid;
                 border-radius: 10px;
-                margin: 0.5rem 4rem;
+                margin: 0.5rem;
                 text-align: center;
                 padding: 1rem;
 
@@ -46,8 +48,9 @@
 
         .pie-container {
             text-align: center;
+            margin: 0,5rem;
             width: 100%;
-            max-width: 700px;
+            max-width: 650px;
             margin-top: 2rem;
         }
     }
