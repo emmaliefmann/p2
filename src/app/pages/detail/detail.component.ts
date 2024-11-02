@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { Chart } from 'chart.js';
 
 import { Olympic } from '../../core/models/olympic.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
@@ -32,7 +31,6 @@ export class DetailComponent implements OnInit {
   ngOnInit(): void {
     if (this.route.snapshot.paramMap.get('id') !== null) {
       this.country = this.route.snapshot.paramMap.get('id')!;
-      console.log(this.country);
       this.getDetailData();
     }
   }
