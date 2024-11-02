@@ -1,0 +1,72 @@
+@import '/src/app/styles/_variables.scss';
+
+:host {
+    .page-cont {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+
+        .return {
+            width: 100%;
+            text-align: left;
+            padding-top: 1rem;
+            padding-left: 0.7rem;
+        }
+
+        .title-cont {
+            background-color: #04838f;
+            text-align: center;
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            margin: 0.5rem;
+            margin-top: 2rem;
+            text-align: center;
+
+            h1 {
+                margin: 0;
+                color: white;
+                font-weight: lighter;
+            }
+        }
+
+        .number-container {
+            display: flex;
+            justify-content: space-around;
+            min-width: 400px;
+            width: 70%;
+            max-width: 800px;
+
+            @media (max-width: $breakpoint-sm) {
+                flex-direction: column;
+            }
+
+            div {
+                border: 2px #04838f solid;
+                border-radius: 10px;
+                margin: 0.5rem;
+                text-align: center;
+                padding: 1rem;
+
+                h3 {
+                    margin: 0;
+                    margin-bottom: 0.5rem;
+                    font-weight: lighter;
+                    font-size: 12pt;
+                }
+
+                span {
+                    font-weight: bold;
+                    font-size: 12pt;
+                }
+            }
+        }
+
+        .chart-container {
+            text-align: center;
+            margin: 0, 5rem;
+            width: 100%;
+            max-width: 750px;
+            margin-top: 2rem;
+        }
+    }
+}
