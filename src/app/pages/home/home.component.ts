@@ -22,9 +22,8 @@ export class HomeComponent implements OnInit {
   public labels: string[] = [];
   public options: any;
   public nbOlympics: number = 0;
+  public olympicsData!: Olympic[];
   
-  private medalData: number[] = [];
-  private countryColors: string[] = [];
   private destroy$ = new Subject<void>();
   
   constructor(private olympicService: OlympicService, private router: Router) { }
@@ -37,7 +36,7 @@ export class HomeComponent implements OnInit {
       .subscribe({
       next: (olympics) => {
         if (olympics) {
-          this.createDatasets(olympics);
+          this.olympicsData = olympics;
           this.getNumberOfJO(olympics);
         }
       },
@@ -45,75 +44,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  handleClick($event: ChartClickEvent) {
-    const i: number = $event.element.index;
-    const selected: string = this.data.labels[i];
-    if (selected) {
-      this.router.navigate([`/detail/${selected}`]);
-    }
-  }
-
   getNumberOfJO(olympics: Olympic[]): void {
     const years: Set<number> = new Set(olympics.flatMap(country => country.participations.map(participation => participation.year)));
     this.nbOlympics = years.size;
-  }
-
-  createDatasets(olympics: Olympic[]) {
-    olympics.forEach((olympic) => {
-      // collects corresponding country color from styles.scss
-      this.countryColors.push(this.getCountryColor(olympic.country));
-      this.labels.push(olympic.country);
-      let medals = 0;
-      olympic.participations.forEach((participation) => {
-        medals += participation.medalsCount;
-      });
-      this.medalData.push(medals);
-    });
-    this.updateChart();
-  }
-
-  getCountryColor(country: string): string {
-    // collects corresponding country color from styles.scss
-    const code = country.toLowerCase().split(' ').join('-');
-    let get = getComputedStyle(document.documentElement).getPropertyValue(`--${code}-color`);
-    // If color not found, highlight color provided as a fallback
-    if (get === '') {
-      get = getComputedStyle(document.documentElement).getPropertyValue(`--accent-color`);
-    }
-    return get;
-  }
-
-  updateChart() {
-    this.data = {
-      labels: this.labels,
-      datasets: [
-        {
-          data: [...this.medalData],
-          backgroundColor: [
-            ...this.countryColors
-          ]
-        },
-      ],
-    };
-
-    this.options = {
-      plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--accent-color'),
-          padding: 10,
-          displayColors: false,
-          titleAlign: 'center',
-          bodyAlign: 'center',
-        },
-        elements: {
-          arc: {
-            borderColor: 'transparent'
-          }
-        }
-      }
-    }
   }
 }
