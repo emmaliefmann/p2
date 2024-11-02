@@ -8,10 +8,12 @@ import { DetailComponent } from './pages/detail/detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 // PrimeNG imports
 import { ChartModule } from 'primeng/chart';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, DetailComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ChartModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ChartModule, ProgressSpinnerModule],
   providers: [],
   bootstrap: [AppComponent],
 })

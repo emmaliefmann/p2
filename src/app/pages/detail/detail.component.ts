@@ -53,6 +53,7 @@ export class DetailComponent implements OnInit {
       },
     });
   }
+  
   createChartData(olympic: Olympic) {
     this.nbEntries = olympic.participations.length;
 

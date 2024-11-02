@@ -2,10 +2,19 @@
     .page-container {
         display: flex;
         justify-content: center;
+
         .content {
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
         }
+    }
+
+    .spinner {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        min-height: 60vh;
     }
 }

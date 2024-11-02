@@ -1,5 +1,11 @@
 <div class="page-container">
-    <main class="content">
+    <div class="spinner" *ngIf="isLoading">
+        <p-progressSpinner ariaLabel="loading" />
+    </div>
+    <div class="error-message" *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
+    </div>
+    <main class="content" *ngIf="!isLoading">
         <router-outlet></router-outlet>
     </main>
 </div>
