@@ -8,7 +8,6 @@ import { take } from 'rxjs';
 
 @Component({
   selector: 'app-detail',
-  standalone: false,
   templateUrl: './detail.component.html',
   styleUrl: './detail.component.scss'
 })
@@ -20,9 +19,7 @@ export class DetailComponent implements OnInit {
   public nbAthletes: number = 0;
   public data: any;
   public options: any;
-  
-  private medalData: number[] = [];
-  private chartLabels: string[] = [];
+  public countryData!: Olympic; 
 
   constructor(
     private route: ActivatedRoute,
@@ -42,6 +39,8 @@ export class DetailComponent implements OnInit {
     .subscribe({
       next: (olympic) => {
         if (olympic) {
+          this.countryData = olympic;
+          this.nbEntries = olympic.participations.length;
           this.createChartData(olympic);
         } else {
           this.router.navigate(['/notfound']);
@@ -59,29 +58,8 @@ export class DetailComponent implements OnInit {
 
     olympic.participations.forEach((participation) => {
       this.nbMedals += participation.medalsCount;
-      this.medalData.push(participation.medalsCount);
       this.nbAthletes += participation.athleteCount;
-      this.chartLabels.push(participation.year.toString());
     });
-    this.updateChart();
-  }
-
-  updateChart() {
-    this.data = {
-      labels: this.chartLabels,
-      datasets: [
-        {
-          label: 'Medals per year',
-          data: [...this.medalData],
-          fill: false,
-        },
-      ],
-    };
-
-    this.options = {
-      maintainAspectRatio: false,
-      aspectRatio: 0.6,
-    };
   }
 
 }

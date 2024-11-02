@@ -1,3 +1,7 @@
 <div class="pie-container">
+    <div class="error" *ngIf="olympics.length === 0">
+        <p-messages [(value)]="messages" [closable]="false" />
+        <a class="return" routerLink="/">Return to homepage</a>
+    </div>
     <p-chart #chart type="pie" [data]="data" [options]="options" (onDataSelect)="handleClick($event)" />
 </div>

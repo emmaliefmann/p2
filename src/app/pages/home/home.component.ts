@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 
 import { Olympic } from 'src/app/core/models/olympic.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
-import { ChartClickEvent } from 'src/app/core/models/ChartClickEvent.model';
 
 @Component({
   selector: 'app-home',
@@ -23,29 +22,30 @@ export class HomeComponent implements OnInit {
   public options: any;
   public nbOlympics: number = 0;
   public olympicsData!: Olympic[];
-  
+
   private destroy$ = new Subject<void>();
-  
+
   constructor(private olympicService: OlympicService, private router: Router) { }
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
     this.olympicService.getOlympics()
-    .pipe(
-      takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$))
       .subscribe({
-      next: (olympics) => {
-        if (olympics) {
-          this.olympicsData = olympics;
-          this.getNumberOfJO(olympics);
-        }
-      },
-      error: (err) => console.warn(err)
-    });
+        next: (olympics) => {
+          if (olympics) {
+            this.olympicsData = olympics;
+            this.getNumberOfJO(olympics);
+          }
+        },
+        error: (err) => console.warn(err)
+      });
   }
 
   getNumberOfJO(olympics: Olympic[]): void {
-    const years: Set<number> = new Set(olympics.flatMap(country => country.participations.map(participation => participation.year)));
+    const years: Set<number> = new Set(olympics.flatMap(
+      country => country.participations.map(participation => participation.year)));
     this.nbOlympics = years.size;
   }
 }

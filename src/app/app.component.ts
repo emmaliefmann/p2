@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   public isLoading = false;
   public errorMessage: string | null = null;
   public messages: Message[] = [];
+  
   constructor(private olympicService: OlympicService) { }
 
   ngOnInit(): void {

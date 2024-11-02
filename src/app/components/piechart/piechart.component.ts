@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
+import { Message } from 'primeng/api';
 import { ChartClickEvent } from 'src/app/core/models/ChartClickEvent.model';
 import { Olympic } from 'src/app/core/models/olympic.model';
 
@@ -20,6 +21,7 @@ export class PiechartComponent {
   public data!: any;
   public labels: string[] = [];
   public options: any;
+  public messages: Message[] = [];
   
   private medalData: number[] = [];
   private countryColors: string[] = [];
@@ -29,6 +31,11 @@ export class PiechartComponent {
   ngOnInit(): void {
     if (this.olympics.length > 0) {
       this.createDatasets(this.olympics);
+    } else {
+      this.messages = this.messages = [{
+        severity: 'error',
+        detail: 'An error occurred retrieving the data, try again later'
+      }]
     }
   }
 
