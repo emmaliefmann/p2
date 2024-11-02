@@ -12,7 +12,5 @@
             <span>{{ (olympics$ | async)?.length }}</span>
         </div>
     </div>
-    <div class="pie-container">
-        <p-chart #chart type="pie" [data]="data" [options]="options" (onDataSelect)="handleClick($event)" />
-    </div>
+    <app-piechart [olympics]="olympicsData" class="full-width"></app-piechart>
 </div>

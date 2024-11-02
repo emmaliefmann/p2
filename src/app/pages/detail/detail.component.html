@@ -17,7 +17,4 @@
             <h3>number of athletes</h3> <span>{{ nbAthletes }} </span>
         </div>
     </div>
-
-    <div class="chart-container">
-        <p-chart type="line" [data]="data" />
-    </div>
+    <app-line-chart [countryData]="countryData" class="full-width"></app-line-chart>

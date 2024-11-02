@@ -3,6 +3,11 @@
         display: flex;
         align-items: center;
         flex-direction: column;
+        .full-width {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
 
         .title-cont {
             background-color: #04838f;
@@ -44,14 +49,6 @@
                     font-size: 12pt;
                 }
             }
-        }
-
-        .pie-container {
-            text-align: center;
-            margin: 0,5rem;
-            width: 100%;
-            max-width: 650px;
-            margin-top: 2rem;
         }
     }
 }

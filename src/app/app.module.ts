@@ -6,13 +6,16 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { DetailComponent } from './pages/detail/detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { PiechartComponent } from './components/piechart/piechart.component';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
+
 // PrimeNG imports
 import { ChartModule } from 'primeng/chart';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MessagesModule } from 'primeng/messages';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, DetailComponent, NotFoundComponent],
+  declarations: [AppComponent, HomeComponent, DetailComponent, NotFoundComponent, PiechartComponent, LineChartComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, ChartModule, ProgressSpinnerModule, MessagesModule],
   providers: [],
   bootstrap: [AppComponent],
