@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { Olympic } from '../../core/models/olympic.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-detail',
@@ -13,14 +14,15 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 })
 
 export class DetailComponent implements OnInit {
-  country!: string;
-  nbEntries: number = 0;
-  nbMedals: number = 0;
-  nbAthletes: number = 0;
-  medalData: number[] = [];
-  chartLabels: string[] = [];
-  data: any;
-  options: any;
+  public country!: string;
+  public nbEntries: number = 0;
+  public nbMedals: number = 0;
+  public nbAthletes: number = 0;
+  public data: any;
+  public options: any;
+  
+  private medalData: number[] = [];
+  private chartLabels: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +37,9 @@ export class DetailComponent implements OnInit {
     }
   }
   getDetailData() {
-    this.olympicService.getOlympicByName(this.country).subscribe({
+    this.olympicService.getOlympicByName(this.country)
+    .pipe(take(1))
+    .subscribe({
       next: (olympic) => {
         if (olympic) {
           this.createChartData(olympic);

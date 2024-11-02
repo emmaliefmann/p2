@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject, takeUntil } from 'rxjs';
 import { ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
 import { Router } from '@angular/router';
@@ -18,26 +18,30 @@ export class HomeComponent implements OnInit {
   @ViewChild('chart') chart!: Chart;
 
   public olympics$: Observable<Olympic[] | null> = of(null);
-  data!: any;
-  labels: string[] = [];
-  medalData: number[] = [];
-  countryColors: string[] = [];
-  nbOlympics: number = 0;
-  options: any;
-
+  public data!: any;
+  public labels: string[] = [];
+  public options: any;
+  public nbOlympics: number = 0;
+  
+  private medalData: number[] = [];
+  private countryColors: string[] = [];
+  private destroy$ = new Subject<void>();
+  
   constructor(private olympicService: OlympicService, private router: Router) { }
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics();
-    this.olympicService.getOlympics().subscribe({
+    this.olympicService.getOlympics()
+    .pipe(
+      takeUntil(this.destroy$))
+      .subscribe({
       next: (olympics) => {
         if (olympics) {
           this.createDatasets(olympics);
           this.getNumberOfJO(olympics);
         }
       },
-      error: (err) => console.warn(err),
-      complete: () => { },
+      error: (err) => console.warn(err)
     });
   }
 
