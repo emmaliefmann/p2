@@ -1,41 +1,66 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Olympic } from '../models/olympic.model';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<any>(undefined);
+  private loadingSubject$ = new BehaviorSubject<boolean>(false);
+  private errorMessageSubject$ = new BehaviorSubject<string | null>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   loadInitialData() {
+    this.loadingSubject$.next(true);
     return this.http.get<Olympic[]>(this.olympicUrl).pipe(
-      tap((value) => this.olympics$.next(value)),
-      catchError((error, caught) => {
-        // TODO: improve error handling
-        console.error(error);
-        // can be useful to end loading state and let the user know something went wrong
+      tap((value) => {
+        this.olympics$.next(value);
+        this.loadingSubject$.next(false);
+        // to clear error, if previously error
+        this.errorMessageSubject$.next(null);
+      }),
+      catchError((error) => {
+        console.error('Error loading Olympics data:', error);
         this.olympics$.next(null);
-        return caught;
+        this.loadingSubject$.next(false);
+        this.errorMessageSubject$.next('Failed to load Olympics data. Please try again later.');
+        return of([]);
       })
     );
   }
 
-  getOlympics(): Observable<Olympic[] | null> {
+  get loading$() {
+    return this.loadingSubject$.asObservable();
+  }
+
+  get errorMessage$() {
+    return this.errorMessageSubject$.asObservable();
+  }
+
+  getOlympics(): Observable<Olympic[]> {
     return this.olympics$.asObservable();
   }
 
   getOlympicByName(name: string): Observable<Olympic | null> {
-    return this.loadInitialData().pipe( 
-      switchMap(() => this.getOlympics()),
+    this.loadingSubject$.next(true);
+    return this.olympics$.pipe(
       map((olympics) => {
-        const found = olympics?.find((olympic) => olympic.country === name);
-        return found || null; 
+        const found = olympics?.find((olympic: Olympic) => olympic.country === name);
+        this.loadingSubject$.next(false); 
+        this.errorMessageSubject$.next(null); 
+        return found || null;
+      }),
+      catchError((error) => {
+        console.error('Error fetching Olympics data:', error);
+        this.loadingSubject$.next(false);
+        this.errorMessageSubject$.next(`Failed to fetch Olympic data for ${name}. Please try again later.`);
+        return of(null);
       })
     );
   }
