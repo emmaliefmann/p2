@@ -1,8 +1,17 @@
+@import '/src/app/styles/_variables.scss';
+
 :host {
     .page-cont {
         display: flex;
         align-items: center;
         flex-direction: column;
+
+        .return {
+            width: 100%;
+            text-align: left;
+            padding-top: 1rem;
+            padding-left: 0.7rem;
+        }
 
         .title-cont {
             background-color: #04838f;
@@ -26,6 +35,11 @@
             min-width: 400px;
             width: 70%;
             max-width: 800px;
+
+            @media (max-width: $breakpoint-sm) {
+                flex-direction: column;
+            }
+
             div {
                 border: 2px #04838f solid;
                 border-radius: 10px;
@@ -39,6 +53,7 @@
                     font-weight: lighter;
                     font-size: 12pt;
                 }
+
                 span {
                     font-weight: bold;
                     font-size: 12pt;
@@ -46,11 +61,11 @@
             }
         }
 
-        .pie-container {
+        .chart-container {
             text-align: center;
-            margin: 0,5rem;
+            margin: 0, 5rem;
             width: 100%;
-            max-width: 650px;
+            max-width: 750px;
             margin-top: 2rem;
         }
     }

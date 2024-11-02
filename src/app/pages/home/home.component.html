@@ -1,3 +1,18 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<div class="page-cont">
+    <div class="title-cont">
+        <h1>Medals per Country</h1>
+    </div>
+    <div class="number-container">
+        <div>
+            <h3>Number of JOs</h3>
+            <span>{{ nbOlympics }}</span>
+        </div>
+        <div>
+            <h3>Number of countries</h3>
+            <span>{{ (olympics$ | async)?.length }}</span>
+        </div>
+    </div>
+    <div class="pie-container">
+        <p-chart #chart type="pie" [data]="data" [options]="options" (onDataSelect)="handleClick($event)" />
+    </div>
+</div>

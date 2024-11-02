@@ -1,0 +1,23 @@
+<div class="page-cont">
+    <a class="return" routerLink="/">Go back</a>
+    <div class="title-cont">
+        <h1>{{ country }}</h1>
+    </div>
+    <div class="number-container">
+        <div>
+            <h3>number of entries </h3>
+            <span> {{ nbEntries }} </span>
+        </div>
+
+        <div>
+            <h3>number of medals</h3> <span>{{ nbMedals }} </span>
+        </div>
+
+        <div>
+            <h3>number of athletes</h3> <span>{{ nbAthletes }} </span>
+        </div>
+    </div>
+
+    <div class="chart-container">
+        <p-chart type="line" [data]="data" />
+    </div>
