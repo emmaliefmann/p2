@@ -3,9 +3,10 @@
         <p-progressSpinner ariaLabel="loading" />
     </div>
     <div class="error-message" *ngIf="errorMessage">
-        <p>{{ errorMessage }}</p>
+        <p-messages [(value)]="messages" [closable]="false" />
+        <a class="return" routerLink="/">Return to homepage</a>
     </div>
-    <main class="content" *ngIf="!isLoading">
+    <main class="content" *ngIf="!isLoading && !errorMessage">
         <router-outlet></router-outlet>
     </main>
 </div>
