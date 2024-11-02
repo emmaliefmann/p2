@@ -4,14 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
-import { DetailComponent } from './pages/detail/detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-// PrimeNG imports
-import { ChartModule } from 'primeng/chart';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, DetailComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, ChartModule],
+  declarations: [AppComponent, HomeComponent, NotFoundComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
