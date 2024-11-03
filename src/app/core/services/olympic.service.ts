@@ -10,7 +10,7 @@ import { Olympic } from '../models/olympic.model';
 
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
-  private olympics$ = new BehaviorSubject<any>(undefined);
+  private olympics$ = new BehaviorSubject<Olympic[]>([]);
   private loadingSubject$ = new BehaviorSubject<boolean>(false);
   private errorMessageSubject$ = new BehaviorSubject<string | null>(null);
 
@@ -27,7 +27,7 @@ export class OlympicService {
       }),
       catchError((error) => {
         console.error('Error loading Olympics data:', error);
-        this.olympics$.next(null);
+        this.olympics$.next([]);
         this.loadingSubject$.next(false);
         this.errorMessageSubject$.next('Failed to load Olympics data. Please try again later.');
         return of([]);
