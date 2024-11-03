@@ -8,7 +8,6 @@ import { Olympic } from 'src/app/core/models/olympic.model';
 })
 
 export class LineChartComponent {
-
   @Input()
   countryData!: Olympic;
   public data: any;
@@ -24,7 +23,6 @@ export class LineChartComponent {
   }
 
   createChartData(olympic: Olympic) {
-
     olympic.participations.forEach((participation) => {
       this.medalData.push(participation.medalsCount);
       this.chartLabels.push(participation.year.toString());
