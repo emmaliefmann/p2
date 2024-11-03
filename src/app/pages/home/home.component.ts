@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, of, Subject, takeUntil } from 'rxjs';
 import { ViewChild } from '@angular/core';
 import { Chart } from 'chart.js';
@@ -13,7 +13,7 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   styleUrls: ['./home.component.scss'],
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   @ViewChild('chart') chart!: Chart;
 
   public olympics$: Observable<Olympic[] | null> = of(null);
@@ -41,6 +41,10 @@ export class HomeComponent implements OnInit {
         },
         error: (err) => console.warn(err)
       });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
   }
 
   getNumberOfJO(olympics: Olympic[]): void {
