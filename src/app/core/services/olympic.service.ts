@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, delay, map, tap } from 'rxjs/operators';
 import { Olympic } from '../models/olympic.model';
 
 @Injectable({
@@ -19,6 +19,7 @@ export class OlympicService {
   loadInitialData() {
     this.loadingSubject$.next(true);
     return this.http.get<Olympic[]>(this.olympicUrl).pipe(
+      delay(5000),
       tap((value) => {
         this.olympics$.next(value);
         this.loadingSubject$.next(false);
